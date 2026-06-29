@@ -1,0 +1,44 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Agentic Process",
+    "kind": "process",
+    "type": "processOrchestration",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "d2a1d896-e4d8-4ef3-8d66-248bae4178fb",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "Agentic Process",
+        "kind": "package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "type": "ProcessOrchestration",
+      "name": "Agentic Process",
+      "package": {
+        "key": "946ebb66-6140-4e5f-9fba-1619426735a3"
+      },
+      "packageName": "ClassificationAgentSolution.agentic.Agentic.Process",
+      "inputArguments": "{}",
+      "hiddenForAttendedUser": false,
+      "alwaysRunning": false,
+      "autoStartProcess": false,
+      "targetFrameworkValue": "Portable",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180,
+      "tags": []
+    },
+    "locks": [],
+    "key": "2c9b36f3-b32e-48c7-a8ad-345602a600ad"
+  }
+}

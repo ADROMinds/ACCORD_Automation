@@ -1,0 +1,15 @@
+{
+  "SolutionId": "33e91da9-af81-43eb-8322-9d9fe52ba300",
+  "Projects": [
+    {
+      "Id": "d2a1d896-e4d8-4ef3-8d66-248bae4178fb",
+      "Type": "ProcessOrchestration",
+      "ProjectRelativePath": "Agentic Process/project.uiproj"
+    },
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "EmailAgent/project.uiproj",
+      "Id": "f779a4fd-d777-4207-b623-71cf32516993"
+    }
+  ]
+}

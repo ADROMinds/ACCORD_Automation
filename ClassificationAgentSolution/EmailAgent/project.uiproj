@@ -1,0 +1,6 @@
+{
+  "ProjectType": "Agent",
+  "Name": "EmailAgent",
+  "Description": "Email Analysis Agent",
+  "MainFile": null
+}

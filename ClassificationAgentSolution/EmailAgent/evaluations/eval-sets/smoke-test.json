@@ -1,0 +1,53 @@
+{
+  "version": "1.0",
+  "id": "smoke-test",
+  "name": "Smoke Test",
+  "evaluatorRefs": [
+    "LLMJudgeTrajectoryEvaluator"
+  ],
+  "evaluations": [
+    {
+      "id": "test-1",
+      "name": "Order damaged",
+      "inputs": {
+        "email_payload": {
+          "subject": "Order #12345 - Damaged Item",
+          "body": "Dear Support, I am writing to report an issue with my recent order #12345. The item I received is damaged. Please let me know how to proceed with a return. Best regards, Jane",
+          "sender": "jane@example.com",
+          "received_at": "2026-06-15T10:00:00Z",
+          "attachment_names": ["photo_of_damage.jpg"],
+          "message_id": "MSG-001"
+        },
+        "confidence_threshold": 0.8
+      },
+      "evaluationCriterias": {
+        "LLMJudgeTrajectoryEvaluator": {
+          "expectedAgentBehavior": "Agent should detect intent as 'damaged item/return request' and provide a summary about the damaged order #12345."
+        }
+      }
+    },
+    {
+      "id": "test-2",
+      "name": "Invoice inquiry",
+      "inputs": {
+        "email_payload": {
+          "subject": "Question about Invoice #INV-987",
+          "body": "Hi, I have a question about my last invoice. It seems there is a double charge for the monthly subscription. Can you please check? Thanks, Bob",
+          "sender": "bob@example.com",
+          "received_at": "2026-06-16T09:30:00Z",
+          "attachment_names": [],
+          "message_id": "MSG-002"
+        },
+        "confidence_threshold": 0.8
+      },
+      "evaluationCriterias": {
+        "LLMJudgeTrajectoryEvaluator": {
+          "expectedAgentBehavior": "Agent should detect intent as 'billing inquiry/double charge' and summarize the request to check the last invoice."
+        }
+      }
+    }
+  ],
+  "fileName": "smoke-test.json",
+  "updatedAt": "2026-06-10T12:23:31.893Z",
+  "selectedEntrypoint": "agent"
+}

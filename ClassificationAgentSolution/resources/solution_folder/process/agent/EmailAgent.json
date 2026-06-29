@@ -1,0 +1,40 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "EmailAgent",
+    "kind": "process",
+    "type": "agent",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "f779a4fd-d777-4207-b623-71cf32516993",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "EmailAgent",
+        "kind": "package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "type": "Agent",
+      "name": "EmailAgent",
+      "package": {
+        "key": "30ad1d23-c13a-491e-9aad-3354dade6081"
+      },
+      "inputArguments": "{}",
+      "targetFrameworkValue": "Portable",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180,
+      "packageName": "ClassificationAgentSolution.agent.EmailAgent"
+    },
+    "locks": [],
+    "key": "b7b585a5-c567-416b-91e2-6d58948b52c9"
+  }
+}

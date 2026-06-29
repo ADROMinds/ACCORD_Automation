@@ -1,0 +1,135 @@
+{
+    "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+    "$id": "entry-points.json",
+    "entryPoints": [
+        {
+            "filePath": "agent",
+            "uniqueId": "891bdd3a-fbdb-4839-9da4-f5d97db21264",
+            "type": "agent",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "email_payload": {
+                        "type": "object",
+                        "properties": {
+                            "subject": {
+                                "type": "string",
+                                "title": "Subject",
+                                "description": "Subject of the email"
+                            },
+                            "body": {
+                                "type": "string",
+                                "title": "Body",
+                                "description": "Body content of the email"
+                            },
+                            "sender": {
+                                "type": "string",
+                                "title": "Sender",
+                                "description": "Sender's email address"
+                            },
+                            "received_at": {
+                                "type": "string",
+                                "title": "Received At",
+                                "description": "Timestamp when the email was received"
+                            },
+                            "attachment_names": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "title": "Attachment Names",
+                                "description": "List of attachment filenames"
+                            },
+                            "message_id": {
+                                "type": "string",
+                                "title": "Message ID",
+                                "description": "Unique identifier for the message"
+                            }
+                        },
+                        "required": [
+                            "subject",
+                            "body",
+                            "sender",
+                            "received_at",
+                            "attachment_names",
+                            "message_id"
+                        ],
+                        "title": "Email Payload",
+                        "description": "The email payload to analyze"
+                    },
+                    "confidence_threshold": {
+                        "type": "number",
+                        "default": 0.8,
+                        "title": "Confidence Threshold",
+                        "description": "The confidence threshold for detection"
+                    }
+                },
+                "required": [
+                    "email_payload"
+                ]
+            },
+            "output": {
+                "type": "object",
+                "properties": {
+                    "intent": {
+                        "description": "The detected intent of the email",
+                        "title": "Intent",
+                        "type": "string"
+                    },
+                    "summary": {
+                        "description": "A brief summary of the email content",
+                        "title": "Summary",
+                        "type": "string"
+                    },
+                    "confidence": {
+                        "description": "The confidence score (0.0 to 1.0) for the detected intent",
+                        "title": "Confidence",
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "intent",
+                    "summary",
+                    "confidence"
+                ]
+            },
+            "graph": {
+                "nodes": [
+                    {
+                        "id": "__start__",
+                        "name": "__start__",
+                        "type": "__start__",
+                        "subgraph": null,
+                        "metadata": {}
+                    },
+                    {
+                        "id": "analyze_email",
+                        "name": "analyze_email",
+                        "type": "node",
+                        "subgraph": null,
+                        "metadata": {}
+                    },
+                    {
+                        "id": "__end__",
+                        "name": "__end__",
+                        "type": "__end__",
+                        "subgraph": null,
+                        "metadata": {}
+                    }
+                ],
+                "edges": [
+                    {
+                        "source": "__start__",
+                        "target": "analyze_email",
+                        "label": null
+                    },
+                    {
+                        "source": "analyze_email",
+                        "target": "__end__",
+                        "label": null
+                    }
+                ]
+            }
+        }
+    ]
+}
