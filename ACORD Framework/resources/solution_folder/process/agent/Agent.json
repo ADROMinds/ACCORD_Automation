@@ -1,0 +1,60 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Agent",
+    "kind": "process",
+    "type": "agent",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "Solution.agent.ExtractionAgent",
+        "kind": "Package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "type": "Agent",
+      "agentMemory": false,
+      "targetRuntime": "python",
+      "environmentVariables": "",
+      "referencedAssets": null,
+      "name": "Agent",
+      "description": null,
+      "package": {
+        "name": "Solution.agent.ExtractionAgent",
+        "key": "Solution.agent.ExtractionAgent:1.0.1"
+      },
+      "packageName": "Solution.agent.ExtractionAgent",
+      "packageVersion": "1.0.1",
+      "entryPointUniqueId": "dd6b5e6a-fa02-4220-b78e-e99c2f112e34",
+      "entryPointName": "main.py",
+      "inputArguments": null,
+      "inputArgumentsSchema": null,
+      "outputArgumentsSchema": null,
+      "inputArgumentsSchemaV2": "{\n  \u0022type\u0022: \u0022object\u0022,\n  \u0022properties\u0022: {\n    \u0022attachments\u0022: {\n      \u0022type\u0022: \u0022array\u0022,\n      \u0022items\u0022: {\n        \u0022type\u0022: \u0022object\u0022,\n        \u0022properties\u0022: {\n          \u0022ID\u0022: {\n            \u0022type\u0022: \u0022string\u0022,\n            \u0022format\u0022: \u0022uuid\u0022\n          },\n          \u0022FullName\u0022: {\n            \u0022type\u0022: \u0022string\u0022\n          },\n          \u0022MimeType\u0022: {\n            \u0022type\u0022: \u0022string\u0022\n          }\n        }\n      },\n      \u0022description\u0022: \u0022List of document attachments to process (e.g., ACORD forms).\u0022\n    },\n    \u0022mock_mode\u0022: {\n      \u0022type\u0022: \u0022boolean\u0022,\n      \u0022default\u0022: true,\n      \u0022description\u0022: \u0022If true, returns mock extraction data instead of calling the live IXP model.\u0022\n    }\n  },\n  \u0022required\u0022: [\n    \u0022attachments\u0022\n  ]\n}",
+      "outputArgumentsSchemaV2": "{\n  \u0022type\u0022: \u0022object\u0022,\n  \u0022properties\u0022: {\n    \u0022filtering_results\u0022: {\n      \u0022type\u0022: \u0022array\u0022,\n      \u0022items\u0022: {\n        \u0022type\u0022: \u0022object\u0022\n      }\n    },\n    \u0022extraction_results\u0022: {\n      \u0022type\u0022: \u0022array\u0022,\n      \u0022items\u0022: {\n        \u0022type\u0022: \u0022object\u0022\n      }\n    },\n    \u0022summary\u0022: {\n      \u0022type\u0022: \u0022string\u0022\n    }\n  },\n  \u0022required\u0022: [\n    \u0022filtering_results\u0022,\n    \u0022extraction_results\u0022,\n    \u0022summary\u0022\n  ]\n}",
+      "hiddenForAttendedUser": false,
+      "alwaysRunning": false,
+      "autoStartProcess": false,
+      "targetFrameworkValue": "Portable",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "retentionBucketRef": null,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180,
+      "staleRetentionBucketRef": null,
+      "entryPoints": "[{\u0022UniqueId\u0022:\u0022dd6b5e6a-fa02-4220-b78e-e99c2f112e34\u0022,\u0022Path\u0022:\u0022main.py\u0022,\u0022DisplayName\u0022:null,\u0022InputArguments\u0022:\u0022{\\n  \\\u0022type\\\u0022: \\\u0022object\\\u0022,\\n  \\\u0022properties\\\u0022: {\\n    \\\u0022attachments\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022array\\\u0022,\\n      \\\u0022items\\\u0022: {\\n        \\\u0022type\\\u0022: \\\u0022object\\\u0022,\\n        \\\u0022properties\\\u0022: {\\n          \\\u0022ID\\\u0022: {\\n            \\\u0022type\\\u0022: \\\u0022string\\\u0022,\\n            \\\u0022format\\\u0022: \\\u0022uuid\\\u0022\\n          },\\n          \\\u0022FullName\\\u0022: {\\n            \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n          },\\n          \\\u0022MimeType\\\u0022: {\\n            \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n          }\\n        }\\n      },\\n      \\\u0022description\\\u0022: \\\u0022List of document attachments to process (e.g., ACORD forms).\\\u0022\\n    },\\n    \\\u0022mock_mode\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022boolean\\\u0022,\\n      \\\u0022default\\\u0022: true,\\n      \\\u0022description\\\u0022: \\\u0022If true, returns mock extraction data instead of calling the live IXP model.\\\u0022\\n    }\\n  },\\n  \\\u0022required\\\u0022: [\\n    \\\u0022attachments\\\u0022\\n  ]\\n}\u0022,\u0022OutputArguments\u0022:\u0022{\\n  \\\u0022type\\\u0022: \\\u0022object\\\u0022,\\n  \\\u0022properties\\\u0022: {\\n    \\\u0022filtering_results\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022array\\\u0022,\\n      \\\u0022items\\\u0022: {\\n        \\\u0022type\\\u0022: \\\u0022object\\\u0022\\n      }\\n    },\\n    \\\u0022extraction_results\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022array\\\u0022,\\n      \\\u0022items\\\u0022: {\\n        \\\u0022type\\\u0022: \\\u0022object\\\u0022\\n      }\\n    },\\n    \\\u0022summary\\\u0022: {\\n      \\\u0022type\\\u0022: \\\u0022string\\\u0022\\n    }\\n  },\\n  \\\u0022required\\\u0022: [\\n    \\\u0022filtering_results\\\u0022,\\n    \\\u0022extraction_results\\\u0022,\\n    \\\u0022summary\\\u0022\\n  ]\\n}\u0022,\u0022Type\u0022:4,\u0022TargetRuntime\u0022:null,\u0022ContentRoot\u0022:null,\u0022DataVariation\u0022:null,\u0022Id\u0022:14153370}]",
+      "connections": null,
+      "tags": []
+    },
+    "locks": [],
+    "key": "d777d8db-43b4-4708-b6e9-650e2534f015"
+  }
+}

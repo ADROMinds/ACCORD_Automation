@@ -1,0 +1,18 @@
+{
+  "DocVersion": "1.0.0",
+  "StudioMinVersion": "2025.04.0",
+  "SolutionId": "1e3ac26d-e809-4e30-e1f9-08ded445e2d2",
+  "Projects": [
+    {
+      "Type": "Process",
+      "ProjectRelativePath": "Ingestion Flow/project.uiproj",
+      "Id": "09183b5d-84b9-4157-9f0e-18cd046e78f0"
+    },
+    {
+      "Type": "ProcessOrchestration",
+      "ProjectRelativePath": "Maestro BPMN/project.uiproj",
+      "Id": "e350fb97-facd-48ba-a0f4-1c46a5a85dcc"
+    }
+  ],
+  "AutomationHubIdeaUrl": null
+}

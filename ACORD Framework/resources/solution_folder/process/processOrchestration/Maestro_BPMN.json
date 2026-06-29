@@ -1,0 +1,56 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Maestro BPMN",
+    "kind": "process",
+    "type": "processOrchestration",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "e350fb97-facd-48ba-a0f4-1c46a5a85dcc",
+    "isOverridable": true,
+    "dependencies": [
+      {
+        "name": "Maestro BPMN",
+        "kind": "package"
+      }
+    ],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "entryPointUniqueId": null,
+      "inputArgumentsSchema": null,
+      "outputArgumentsSchema": null,
+      "inputArgumentsSchemaV2": null,
+      "outputArgumentsSchemaV2": null,
+      "type": "ProcessOrchestration",
+      "name": "Maestro BPMN",
+      "description": null,
+      "package": {
+        "key": "e074a65e-2183-4449-b40f-500d158dcff3"
+      },
+      "packageName": "ACORD.Framework.agentic.Maestro.BPMN",
+      "packageVersion": null,
+      "entryPointName": null,
+      "inputArguments": null,
+      "hiddenForAttendedUser": false,
+      "alwaysRunning": false,
+      "autoStartProcess": false,
+      "targetFrameworkValue": "Portable",
+      "retentionAction": "Delete",
+      "retentionPeriod": 30,
+      "retentionBucketRef": null,
+      "staleRetentionAction": "Delete",
+      "staleRetentionPeriod": 180,
+      "staleRetentionBucketRef": null,
+      "entryPoints": null,
+      "connections": null,
+      "tags": []
+    },
+    "locks": [],
+    "key": "6e4b2b29-148c-4401-9de1-18435fca546a"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "ClassificationAgentSolution.agent.EmailAgent",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [
+      {
+        "name": "ClassificationAgentSolution.agent.EmailAgent.1.0.0.nupkg",
+        "kind": "Package",
+        "version": "1.0.0",
+        "url": "https://staging.uipath.com/db1c814d-e255-42e9-83c5-460cbc8cc588/fb1b0a74-6d35-4873-9497-68f7c3d50851/orchestrator_/odata/Processes/UiPath.Server.Configuration.OData.DownloadPackage(key=\u0027ClassificationAgentSolution.agent.EmailAgent:1.0.0\u0027)?feedId=61d79a67-de8b-4089-810f-d42a83304f7e",
+        "key": "ClassificationAgentSolution.agent.EmailAgent_1.0.0"
+      }
+    ],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": "ClassificationAgentSolution.agent.EmailAgent.1.0.0.nupkg",
+      "fileReference": "ClassificationAgentSolution.agent.EmailAgent_1.0.0",
+      "name": "ClassificationAgentSolution.agent.EmailAgent",
+      "description": null
+    },
+    "locks": [],
+    "key": "ClassificationAgentSolution.agent.EmailAgent:1.0.0"
+  }
+}

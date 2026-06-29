@@ -1,0 +1,61 @@
+{
+  "version": "2.0",
+  "resources": [
+    {
+      "resource": "process",
+      "key": "Ingestion Flow",
+      "id": "processIngestion Flow",
+      "value": {
+        "name": {
+          "defaultValue": "Ingestion Flow",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Invoke Ingestion Flow",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "EmailAgent",
+      "id": "processEmailAgent",
+      "value": {
+        "name": {
+          "defaultValue": "EmailAgent",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "Classification Agent",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true",
+        "subType": "Agent"
+      }
+    },
+    {
+      "resource": "process",
+      "key": "ExtractionAgent",
+      "id": "processExtractionAgent",
+      "value": {
+        "name": {
+          "defaultValue": "ExtractionAgent",
+          "isExpression": false,
+          "displayName": "Process name"
+        }
+      },
+      "metadata": {
+        "ActivityName": "IXP Extraction Agent",
+        "BindingsVersion": "2.2",
+        "DisplayLabel": "name",
+        "SolutionsSupport": "true",
+        "subType": "Agent"
+      }
+    }
+  ]
+}

@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:uipath="http://uipath.org/schema/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="UiPath Studio Web (https://uipath.com)" exporterVersion="b52d90e7">
+  <bpmn:message id="Message_Ack" name="BrokerAcknowledgement" />
+  <bpmn:message id="Message_Reply" name="BrokerReply" />
+  <bpmn:collaboration id="Collaboration_1" name="Process">
+    <bpmn:extensionElements>
+      <uipath:variables version="v1">
+        <uipath:inputOutput id="error" name="Error" type="jsonSchema" elementId="Task_ExtractEmail"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outSubject" name="out_Subject" type="string" elementId="Task_ExtractEmail" />
+        <uipath:inputOutput id="outBody" name="out_Body" type="string" elementId="Task_ExtractEmail" />
+        <uipath:inputOutput id="outSender" name="out_Sender" type="string" elementId="Task_ExtractEmail" />
+        <uipath:inputOutput id="outReceivedAt" name="out_ReceivedAt" type="string" elementId="Task_ExtractEmail" />
+        <uipath:inputOutput id="outAttachementList" name="out_AttachementList" type="jsonSchema" subType="string" elementId="Task_ExtractEmail"><![CDATA[{"type":"array","items":{"type":"string"},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="outMessageId" name="out_MessageID" type="string" elementId="Task_ExtractEmail" />
+        <uipath:inputOutput id="error2" name="Error" type="jsonSchema" elementId="Task_ClassificationAgent"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="intent" name="intent" type="string" elementId="Task_ClassificationAgent" />
+        <uipath:inputOutput id="summary" name="summary" type="string" elementId="Task_ClassificationAgent" />
+        <uipath:inputOutput id="confidence" name="confidence" type="number" elementId="Task_ClassificationAgent" />
+        <uipath:inputOutput id="Var_SendAckResponse" name="response" type="Maestro.SendMessageEvent" elementId="Event_SendAck" />
+        <uipath:inputOutput id="error4" name="Error" type="jsonSchema" elementId="Task_IXPExtraction"><![CDATA[{"type":"object","properties":{"code":{"type":"string"},"message":{"type":"string"},"detail":{"type":"string"},"category":{"type":"string"},"status":{"type":"number"},"element":{"type":"string"}}}]]></uipath:inputOutput>
+        <uipath:inputOutput id="filteringResults" name="filtering_results" type="jsonSchema" subType="object" elementId="Task_IXPExtraction"><![CDATA[{"type":"array","items":{"type":"object"},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="extractionResults" name="extraction_results" type="jsonSchema" subType="object" elementId="Task_IXPExtraction"><![CDATA[{"type":"array","items":{"type":"object"},"$schema":"http://json-schema.org/draft-07/schema#"}]]></uipath:inputOutput>
+        <uipath:inputOutput id="summary2" name="summary" type="string" elementId="Task_IXPExtraction" />
+      </uipath:variables>
+      <uipath:bindings version="v1">
+        <uipath:binding id="bbe1O0Lkw" name="folderPath" type="string" resource="process" resourceKey="RPA Workflow" propertyAttribute="folderPath" />
+        <uipath:binding id="b3OZWJTi4" name="name" type="string" default="RPA Workflow" resource="process" resourceKey="RPA Workflow" propertyAttribute="name" />
+        <uipath:binding id="bP75LbOnv" name="folderPath" type="string" resource="process" resourceKey="Ingestion Flow" propertyAttribute="folderPath" />
+        <uipath:binding id="bG3EzOJsr" name="name" type="string" default="Ingestion Flow" resource="process" resourceKey="Ingestion Flow" propertyAttribute="name" />
+        <uipath:binding id="bpznOcdeT" name="folderPath" type="string" resource="process" resourceSubType="Agent" resourceKey="EmailAgent" propertyAttribute="folderPath" />
+        <uipath:binding id="bVRl217O7" name="name" type="string" default="EmailAgent" resource="process" resourceSubType="Agent" resourceKey="EmailAgent" propertyAttribute="name" />
+        <uipath:binding id="bJJtFTP4S" name="folderPath" type="string" resource="process" resourceSubType="Agent" resourceKey="Agent" propertyAttribute="folderPath" />
+        <uipath:binding id="bDQiSHKcS" name="name" type="string" default="Agent" resource="process" resourceSubType="Agent" resourceKey="Agent" propertyAttribute="name" />
+        <uipath:binding id="bqwokqSrv" name="folderPath" type="string" resource="process" resourceSubType="Agent" resourceKey="ExtractionAgent" propertyAttribute="folderPath" />
+        <uipath:binding id="b8MLKcRcZ" name="name" type="string" default="ExtractionAgent" resource="process" resourceSubType="Agent" resourceKey="ExtractionAgent" propertyAttribute="name" />
+      </uipath:bindings>
+      <uipath:migrationVersion version="15" />
+    </bpmn:extensionElements>
+    <bpmn:participant id="Participant_ACORD" name="ACORD Document Processing System" processRef="Process_ACORD" />
+    <bpmn:participant id="Participant_Broker" name="Broker" processRef="Process_Broker" />
+    <bpmn:messageFlow id="MessageFlow_Reply" sourceRef="End_Broker" targetRef="Event_WaitReply" messageRef="Message_Reply" />
+    <bpmn:messageFlow id="edge_rnAJMd" sourceRef="Participant_ACORD" targetRef="End_Broker" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_ACORD" isExecutable="true">
+    <bpmn:extensionElements>
+      <uipath:migrationVersion version="15" />
+      <uipath:intsvcActivityConfig version="v2" />
+      <uipath:variables version="v1">
+        <uipath:inputOutput id="Var_IngestionResponse" name="IngestionResponse" type="json" />
+        <uipath:inputOutput id="Var_EmailSubject" name="EmailSubject" type="string" />
+        <uipath:inputOutput id="Var_EmailBody" name="EmailBody" type="string" />
+        <uipath:inputOutput id="Var_MasterResponse" name="MasterResponse" type="json" />
+        <uipath:inputOutput id="Var_ClassificationResponse" name="ClassificationResponse" type="json" />
+        <uipath:inputOutput id="Var_ConfidenceScore" name="ConfidenceScore" type="number" />
+        <uipath:inputOutput id="Var_Intent" name="Intent" type="string" />
+        <uipath:inputOutput id="Var_AcordFormType" name="AcordFormType" type="string" />
+        <uipath:inputOutput id="Var_StoragePath" name="StoragePath" type="string" />
+        <uipath:inputOutput id="Var_ValidatorResponse" name="ValidatorResponse" type="json" />
+        <uipath:inputOutput id="Var_IXPResponse" name="IXPResponse" type="json" />
+        <uipath:inputOutput id="Var_ExtractedFields" name="ExtractedFields" type="json" />
+        <uipath:inputOutput id="Var_HITLResponse" name="HITLResponse" type="json" />
+        <uipath:inputOutput id="Var_ReceiveReplyResponse" name="ReceiveReplyResponse" type="json" />
+      </uipath:variables>
+    </bpmn:extensionElements>
+    <bpmn:laneSet id="LaneSet_1">
+      <bpmn:lane id="Lane_EmailIngestion" name="Email Ingestion">
+        <bpmn:flowNodeRef>Start_EmailArrives</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ExtractEmail</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Classification" name="Classification Agent">
+        <bpmn:flowNodeRef>Gateway_Join</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ClassificationAgent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_ConfidenceCheck</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_HITL" name="Human in the Loop">
+        <bpmn:flowNodeRef>Task_HITL</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_SendAck</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_WaitReply</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_AcordValidator" name="ACORD Validator Agent" />
+      <bpmn:lane id="Lane_IXPExtraction" name="IXP Extraction Agent">
+        <bpmn:flowNodeRef>Task_IXPExtraction</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_ProcessingComplete</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_EmailArrives" name="Email Arrives">
+      <bpmn:extensionElements>
+        <uipath:entryPointId value="2b1d1545-2ae8-444b-a41a-dc83ad4cd433" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Task_ExtractEmail" name="Invoke Ingestion Flow">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bG3EzOJsr" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bP75LbOnv" />
+            <uipath:input name="_label" type="string" value="Ingestion Flow" />
+          </uipath:context>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error" />
+          <uipath:output name="out_Subject" type="string" source="=out_Subject" var="outSubject" />
+          <uipath:output name="out_Body" type="string" source="=out_Body" var="outBody" />
+          <uipath:output name="out_Sender" type="string" source="=out_Sender" var="outSender" />
+          <uipath:output name="out_ReceivedAt" type="string" source="=out_ReceivedAt" var="outReceivedAt" />
+          <uipath:output name="out_AttachementList" type="jsonSchema" subType="string" source="=out_AttachementList" var="outAttachementList" />
+          <uipath:output name="out_MessageID" type="string" source="=out_MessageID" var="outMessageId" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>edge_Task_ExtractEmail-Gateway_JoinCLa4Ga</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_Join" name="Join">
+      <bpmn:incoming>Flow_12</bpmn:incoming>
+      <bpmn:incoming>edge_Task_ExtractEmail-Gateway_JoinCLa4Ga</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_ClassificationAgent" name="Classification Agent">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartAgentJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.bVRl217O7" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bpznOcdeT" />
+            <uipath:input name="_label" type="string" value="EmailAgent" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"email_payload":{"type":"object"},"confidence_threshold":{"type":"number"}},"required":[]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"email_payload":{"subject":"=vars.outSubject","body":"=vars.outBody","sender":"=vars.outSender","received_at":"=vars.outReceivedAt","attachment_names":"=vars.outAttachementList","message_id":"=vars.outMessageId"},"confidence_threshold":0.7}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error2" />
+          <uipath:output name="intent" type="string" source="=intent" var="intent" />
+          <uipath:output name="summary" type="string" source="=summary" var="summary" />
+          <uipath:output name="confidence" type="number" source="=confidence" var="confidence" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>edge_Task_ClassificationAgent-Gateway_ConfidenceChecksIZ4yf</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_ConfidenceCheck" name="Confidence &#62;= 70%?">
+      <bpmn:incoming>edge_Task_ClassificationAgent-Gateway_ConfidenceChecksIZ4yf</bpmn:incoming>
+      <bpmn:outgoing>Flow_6_No</bpmn:outgoing>
+      <bpmn:outgoing>edge_Gateway_ConfidenceCheck-Task_IXPExtractionJvev65</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_HITL" name="HITL - Broker Review">
+      <bpmn:incoming>Flow_6_No</bpmn:incoming>
+      <bpmn:outgoing>Flow_10</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:intermediateThrowEvent id="Event_SendAck" name="Send Ack to Broker">
+      <bpmn:extensionElements>
+        <uipath:event version="v1">
+          <uipath:type value="Maestro.SendMessageEvent" version="v1" />
+          <uipath:context>
+            <uipath:input name="name" value="BrokerAcknowledgement" />
+            <uipath:input name="_label" value="Send Acknowledgement" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"Reference":{"type":"string","title":"Reference"},"SpecificContent":{"type":"object","title":"Item information"},"TimeToLive":{"type":"duration","title":"Time to live"}},"required":["Reference","name"]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="ItemData" type="json" target="body"><![CDATA[{"Reference":"HITL_ACK","SpecificContent":"={\"emailSubject\":varsEmailSubject,\"brokerAction\":\"Please review and reply\"}","TimeToLive":"PT24H"}]]></uipath:input>
+          <uipath:output name="response" type="Maestro.SendMessageEvent" var="Var_SendAckResponse" />
+        </uipath:event>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_10</bpmn:incoming>
+      <bpmn:outgoing>Flow_11</bpmn:outgoing>
+      <bpmn:messageEventDefinition />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="Event_WaitReply" name="Wait Broker Reply">
+      <bpmn:extensionElements>
+        <uipath:event version="v1">
+          <uipath:type value="Maestro.ReceiveMessageEvent" version="v1" />
+          <uipath:context>
+            <uipath:input name="name" value="BrokerReply" />
+            <uipath:input name="_label" value="Receive Broker Reply" />
+          </uipath:context>
+          <uipath:input name="Reference" type="string" value="BROKER_REPLY" target="body" />
+          <uipath:output name="response" type="Maestro.ReceiveMessageEvent" var="Var_ReceiveReplyResponse" />
+        </uipath:event>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_11</bpmn:incoming>
+      <bpmn:outgoing>Flow_12</bpmn:outgoing>
+      <bpmn:messageEventDefinition />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:serviceTask id="Task_IXPExtraction" name="IXP Extraction Agent">
+      <bpmn:extensionElements>
+        <uipath:activity version="v1">
+          <uipath:type value="Orchestrator.StartAgentJob" version="v2" />
+          <uipath:context>
+            <uipath:input name="name" type="string" value="=bindings.b8MLKcRcZ" />
+            <uipath:input name="folderPath" type="string" value="=bindings.bqwokqSrv" />
+            <uipath:input name="_label" type="string" value="ExtractionAgent" />
+            <uipath:inputSchema type="jsonSchema"><![CDATA[{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{"attachments":{"type":"array"},"mock_mode":{"type":"boolean"}},"required":["attachments"]}]]></uipath:inputSchema>
+          </uipath:context>
+          <uipath:input name="JobArguments" type="json" target="bodyField"><![CDATA[{"attachments":[{"ID":"=vars.outMessageId","FullName":"=vars.outAttachementList[0]","MimeType":"application/JSON"}],"mock_mode":null}]]></uipath:input>
+          <uipath:output name="Error" type="jsonSchema" source="=Error" var="error4" />
+          <uipath:output name="filtering_results" type="jsonSchema" subType="object" source="=filtering_results" var="filteringResults" />
+          <uipath:output name="extraction_results" type="jsonSchema" subType="object" source="=extraction_results" var="extractionResults" />
+          <uipath:output name="summary" type="string" source="=summary" var="summary2" />
+        </uipath:activity>
+      </bpmn:extensionElements>
+      <bpmn:incoming>edge_Gateway_ConfidenceCheck-Task_IXPExtractionJvev65</bpmn:incoming>
+      <bpmn:outgoing>Flow_9</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="End_ProcessingComplete" name="Processing Complete">
+      <bpmn:incoming>Flow_9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_EmailArrives" targetRef="Task_ExtractEmail" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Gateway_Join" targetRef="Task_ClassificationAgent" />
+    <bpmn:sequenceFlow id="Flow_6_No" sourceRef="Gateway_ConfidenceCheck" targetRef="Task_HITL">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=vars.confidence&lt;0.7</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="Task_IXPExtraction" targetRef="End_ProcessingComplete" />
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="Task_HITL" targetRef="Event_SendAck" />
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Event_SendAck" targetRef="Event_WaitReply" />
+    <bpmn:sequenceFlow id="Flow_12" sourceRef="Event_WaitReply" targetRef="Gateway_Join" />
+    <bpmn:sequenceFlow id="edge_Task_ExtractEmail-Gateway_JoinCLa4Ga" sourceRef="Task_ExtractEmail" targetRef="Gateway_Join" />
+    <bpmn:sequenceFlow id="edge_Gateway_ConfidenceCheck-Task_IXPExtractionJvev65" sourceRef="Gateway_ConfidenceCheck" targetRef="Task_IXPExtraction">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=vars.confidence &gt;= 0.7</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="edge_Task_ClassificationAgent-Gateway_ConfidenceChecksIZ4yf" sourceRef="Task_ClassificationAgent" targetRef="Gateway_ConfidenceCheck" />
+  </bpmn:process>
+  <bpmn:process id="Process_Broker" isExecutable="false">
+    <bpmn:startEvent id="Start_Broker" name="Receive Ack">
+      <bpmn:extensionElements>
+        <uipath:entryPointId value="1aff94ae-beb6-459c-8c25-cc9fc02d889f" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_Broker</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Message_Ack" />
+    </bpmn:startEvent>
+    <bpmn:endEvent id="End_Broker" name="Send Reply">
+      <bpmn:incoming>Flow_Broker</bpmn:incoming>
+      <bpmn:incoming>edge_rnAJMd</bpmn:incoming>
+      <bpmn:messageEventDefinition messageRef="Message_Reply" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_Broker" sourceRef="Start_Broker" targetRef="End_Broker" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_1">
+    <bpmndi:BPMNPlane id="Plane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="S_Lane_EmailIngestion" bpmnElement="Lane_EmailIngestion" isHorizontal="true">
+        <dc:Bounds x="190" y="50" width="1668" height="125" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="190" y="180" width="1668" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Lane_Classification" bpmnElement="Lane_Classification" isHorizontal="true">
+        <dc:Bounds x="190" y="175" width="1668" height="468" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="190" y="648" width="1668" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Lane_HITL" bpmnElement="Lane_HITL" isHorizontal="true">
+        <dc:Bounds x="188" y="643" width="1668" height="202" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="188" y="850" width="1668" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Lane_AcordValidator" bpmnElement="Lane_AcordValidator" isHorizontal="true">
+        <dc:Bounds x="190" y="845" width="1668" height="188" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="190" y="1038" width="1668" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Lane_IXPExtraction" bpmnElement="Lane_IXPExtraction" isHorizontal="true">
+        <dc:Bounds x="190" y="1033" width="1668" height="203" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="190" y="1241" width="1668" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Participant_ACORD" bpmnElement="Participant_ACORD" isHorizontal="true">
+        <dc:Bounds x="160" y="50" width="1696" height="1186" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="160" y="1241" width="1696" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Start_EmailArrives" bpmnElement="Start_EmailArrives">
+        <dc:Bounds x="250" y="92" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="250" y="133" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_ExtractEmail" bpmnElement="Task_ExtractEmail">
+        <dc:Bounds x="400" y="70" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="400" y="155" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Gateway_Join" bpmnElement="Gateway_Join">
+        <dc:Bounds x="580" y="215" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="580" y="270" width="50" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_ClassificationAgent" bpmnElement="Task_ClassificationAgent">
+        <dc:Bounds x="750" y="200" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="750" y="285" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Gateway_ConfidenceCheck" bpmnElement="Gateway_ConfidenceCheck">
+        <dc:Bounds x="1100" y="215" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1100" y="270" width="50" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_HITL" bpmnElement="Task_HITL">
+        <dc:Bounds x="1246" y="736" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1246" y="821" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Event_SendAck" bpmnElement="Event_SendAck">
+        <dc:Bounds x="1502" y="704" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1502" y="745" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Event_WaitReply" bpmnElement="Event_WaitReply">
+        <dc:Bounds x="248" y="690" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="248" y="731" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Task_IXPExtraction" bpmnElement="Task_IXPExtraction">
+        <dc:Bounds x="1584" y="1120" width="100" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1584" y="1205" width="100" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_End_ProcessingComplete" bpmnElement="End_ProcessingComplete">
+        <dc:Bounds x="1800" y="1080" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1800" y="1121" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Participant_Broker" bpmnElement="Participant_Broker" isHorizontal="true">
+        <dc:Bounds x="160" y="860" width="500" height="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="160" y="1005" width="500" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Start_Broker" bpmnElement="Start_Broker">
+        <dc:Bounds x="250" y="912" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="250" y="953" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_End_Broker" bpmnElement="End_Broker">
+        <dc:Bounds x="450" y="912" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="450" y="953" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_Flow_1" bpmnElement="Flow_1">
+        <di:waypoint x="286" y="110" />
+        <di:waypoint x="400" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_Flow_3" bpmnElement="Flow_3">
+        <di:waypoint x="630" y="240" />
+        <di:waypoint x="750" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_Flow_6_No" bpmnElement="Flow_6_No">
+        <di:waypoint x="1150" y="240" />
+        <di:waypoint x="1199" y="240" />
+        <di:waypoint x="1199" y="776" />
+        <di:waypoint x="1248" y="776" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_Flow_9" bpmnElement="Flow_9">
+        <di:waypoint x="1684" y="1160" />
+        <di:waypoint x="1856" y="1160" />
+        <di:waypoint x="1856" y="1098" />
+        <di:waypoint x="1836" y="1098" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_Flow_10" bpmnElement="Flow_10">
+        <di:waypoint x="1348" y="776" />
+        <di:waypoint x="1426" y="776" />
+        <di:waypoint x="1426" y="722" />
+        <di:waypoint x="1504" y="722" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_Flow_11" bpmnElement="Flow_11">
+        <di:waypoint x="1504" y="722" />
+        <di:waypoint x="230" y="722" />
+        <di:waypoint x="230" y="708" />
+        <di:waypoint x="250" y="708" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_Flow_12" bpmnElement="Flow_12">
+        <di:waypoint x="250" y="708" />
+        <di:waypoint x="230" y="708" />
+        <di:waypoint x="230" y="240" />
+        <di:waypoint x="580" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_Flow_Broker" bpmnElement="Flow_Broker">
+        <di:waypoint x="286" y="930" />
+        <di:waypoint x="450" y="930" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_MessageFlow_Reply" bpmnElement="MessageFlow_Reply">
+        <di:waypoint x="486" y="930" />
+        <di:waypoint x="506" y="930" />
+        <di:waypoint x="506" y="819" />
+        <di:waypoint x="230" y="819" />
+        <di:waypoint x="230" y="708" />
+        <di:waypoint x="250" y="708" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_Task_ExtractEmail-Gateway_JoinCLa4Ga" bpmnElement="edge_Task_ExtractEmail-Gateway_JoinCLa4Ga">
+        <di:waypoint x="500" y="110" />
+        <di:waypoint x="540" y="110" />
+        <di:waypoint x="540" y="240" />
+        <di:waypoint x="580" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_rnAJMd" bpmnElement="edge_rnAJMd">
+        <di:waypoint x="1008" y="1236" />
+        <di:waypoint x="1008" y="1256" />
+        <di:waypoint x="738" y="1256" />
+        <di:waypoint x="738" y="892" />
+        <di:waypoint x="468" y="892" />
+        <di:waypoint x="468" y="912" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_Gateway_ConfidenceCheck-Task_IXPExtractionJvev65" bpmnElement="edge_Gateway_ConfidenceCheck-Task_IXPExtractionJvev65">
+        <di:waypoint x="1100" y="240" />
+        <di:waypoint x="1080" y="240" />
+        <di:waypoint x="1080" y="1160" />
+        <di:waypoint x="1584" y="1160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_edge_Task_ClassificationAgent-Gateway_ConfidenceChecksIZ4yf" bpmnElement="edge_Task_ClassificationAgent-Gateway_ConfidenceChecksIZ4yf">
+        <di:waypoint x="850" y="240" />
+        <di:waypoint x="1100" y="240" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

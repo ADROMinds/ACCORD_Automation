@@ -1,0 +1,33 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Solution.agent.ExtractionAgent",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [
+      {
+        "name": "Solution.agent.ExtractionAgent.1.0.1.nupkg",
+        "kind": "Package",
+        "version": "1.0.1",
+        "url": "https://staging.uipath.com/db1c814d-e255-42e9-83c5-460cbc8cc588/fb1b0a74-6d35-4873-9497-68f7c3d50851/orchestrator_/odata/Processes/UiPath.Server.Configuration.OData.DownloadPackage(key=\u0027Solution.agent.ExtractionAgent:1.0.1\u0027)?feedId=61d79a67-de8b-4089-810f-d42a83304f7e",
+        "key": "Solution.agent.ExtractionAgent_1.0.1"
+      }
+    ],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": "Solution.agent.ExtractionAgent.1.0.1.nupkg",
+      "fileReference": "Solution.agent.ExtractionAgent_1.0.1",
+      "name": "Solution.agent.ExtractionAgent",
+      "description": null
+    },
+    "locks": [],
+    "key": "Solution.agent.ExtractionAgent:1.0.1"
+  }
+}

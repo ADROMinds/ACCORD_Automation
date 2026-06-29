@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Ingestion Flow",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "09183b5d-84b9-4157-9f0e-18cd046e78f0",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "Ingestion Flow",
+      "description": null
+    },
+    "locks": [],
+    "key": "5b0ccfbb-d992-4694-b808-b88bd59d5d30"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "ProjectType": "Process",
+  "Name": "Ingestion Flow",
+  "Description": null,
+  "MainFile": "Main.xaml"
+}

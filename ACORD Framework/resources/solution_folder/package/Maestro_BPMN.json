@@ -1,0 +1,26 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "Maestro BPMN",
+    "kind": "package",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "projectKey": "e350fb97-facd-48ba-a0f4-1c46a5a85dcc",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "fileName": null,
+      "fileReference": null,
+      "name": "Maestro BPMN",
+      "description": null
+    },
+    "locks": [],
+    "key": "e074a65e-2183-4449-b40f-500d158dcff3"
+  }
+}

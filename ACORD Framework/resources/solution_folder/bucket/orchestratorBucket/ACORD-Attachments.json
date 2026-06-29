@@ -1,0 +1,27 @@
+{
+  "docVersion": "1.0.0",
+  "resource": {
+    "name": "ACORD-Attachments",
+    "kind": "bucket",
+    "type": "orchestratorBucket",
+    "apiVersion": "orchestrator.uipath.com/v1",
+    "isOverridable": true,
+    "dependencies": [],
+    "runtimeDependencies": [],
+    "files": [],
+    "folders": [
+      {
+        "fullyQualifiedName": "solution_folder"
+      }
+    ],
+    "spec": {
+      "type": "Orchestrator",
+      "name": "ACORD-Attachments",
+      "description": null,
+      "options": null,
+      "tags": []
+    },
+    "locks": [],
+    "key": "0b7e79df-13bd-414f-8e4d-447fc936e945"
+  }
+}
