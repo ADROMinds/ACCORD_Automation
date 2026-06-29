@@ -1,0 +1,122 @@
+{
+    "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+    "$id": "entry-points.json",
+    "entryPoints": [
+        {
+            "filePath": "main.py",
+            "uniqueId": "dd6b5e6a-fa02-4220-b78e-e99c2f112e34",
+            "type": "agent",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "ID": { "type": "string", "format": "uuid" },
+                                "FullName": { "type": "string" },
+                                "MimeType": { "type": "string" }
+                            }
+                        },
+                        "description": "List of document attachments to process (e.g., ACORD forms)."
+                    },
+                    "mock_mode": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "If true, returns mock extraction data instead of calling the live IXP model."
+                    }
+                },
+                "required": [
+                    "attachments"
+                ]
+            },
+            "output": {
+                "type": "object",
+                "properties": {
+                    "filtering_results": { "type": "array", "items": { "type": "object" } },
+                    "extraction_results": { "type": "array", "items": { "type": "object" } },
+                    "summary": { "type": "string" }
+                },
+                "required": [
+                    "filtering_results",
+                    "extraction_results",
+                    "summary"
+                ]
+            },
+            "graph": {
+                "nodes": [
+                    {
+                        "id": "__start__",
+                        "name": "__start__",
+                        "type": "__start__",
+                        "subgraph": null,
+                        "metadata": {}
+                    },
+                    {
+                        "id": "prepare",
+                        "name": "prepare",
+                        "type": "node",
+                        "subgraph": null,
+                        "metadata": {}
+                    },
+                    {
+                        "id": "filter_and_classify",
+                        "name": "filter_and_classify",
+                        "type": "node",
+                        "subgraph": null,
+                        "metadata": {}
+                    },
+                    {
+                        "id": "ixp_extraction",
+                        "name": "ixp_extraction",
+                        "type": "node",
+                        "subgraph": null,
+                        "metadata": {}
+                    },
+                    {
+                        "id": "postprocess",
+                        "name": "postprocess",
+                        "type": "node",
+                        "subgraph": null,
+                        "metadata": {}
+                    },
+                    {
+                        "id": "__end__",
+                        "name": "__end__",
+                        "type": "__end__",
+                        "subgraph": null,
+                        "metadata": {}
+                    }
+                ],
+                "edges": [
+                    {
+                        "source": "__start__",
+                        "target": "prepare",
+                        "label": null
+                    },
+                    {
+                        "source": "prepare",
+                        "target": "filter_and_classify",
+                        "label": null
+                    },
+                    {
+                        "source": "filter_and_classify",
+                        "target": "ixp_extraction",
+                        "label": null
+                    },
+                    {
+                        "source": "ixp_extraction",
+                        "target": "postprocess",
+                        "label": null
+                    },
+                    {
+                        "source": "postprocess",
+                        "target": "__end__",
+                        "label": null
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+[project]
+name = "Agent"
+version = "0.0.1"
+description = "Agent"
+authors = [{ name = "nishant.mishra@adrosonic.com" }]
+dependencies = [
+    "uipath-langchain[bedrock,vertex]>=0.10.0, <0.11.0",
+    "pypdf>=5.0.0",
+]
+requires-python = ">=3.11"
+
+[dependency-groups]
+dev = [
+    "uipath-dev>=0.0.74",
+]
