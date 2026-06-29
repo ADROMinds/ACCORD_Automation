@@ -1,0 +1,13 @@
+{
+  "DocVersion": "1.0.0",
+  "StudioMinVersion": "2025.04.0",
+  "SolutionId": "bd125122-52d6-488f-2b41-08decd141fb9",
+  "Projects": [
+    {
+      "Type": "Agent",
+      "ProjectRelativePath": "Agent/project.uiproj",
+      "Id": "ca2bd5df-fb55-4a30-856e-b98eae102389"
+    }
+  ],
+  "AutomationHubIdeaUrl": null
+}
