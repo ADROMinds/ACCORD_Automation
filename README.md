@@ -2,8 +2,7 @@
  
 > **Intelligent Insurance Document Processing powered by UiPath Agent Framework + LangGraph**
  
-![Architecture](docs/architecture.png)
- 
+
 ---
  
 ## 1. 📌 Project Description
@@ -65,8 +64,7 @@ ACORD Document Processing System (Multi-Agent Architecture)
 │       ├── ACORD Classification (LLM — pre-trained model identification)
 │       ├── ACORD Extraction    (LLM — high-confidence field extraction)
 │       └── ACORD Validator Agent (UiPath Agent Builder)
-├── 4. Human Collaboration      — HITL Broker Review (low-confidence fallback)
-└── 5. Integration Layer        — Structured Data Repository → Guidewire / CRM
+└── 4. Integration Layer        — Structured Data Repository → Guidewire / CRM
 ```
  
 ### Agent Graph Flow
@@ -138,155 +136,173 @@ Before you begin, make sure you have:
 - [ ] A Google API Key **or** a Hugging Face inference endpoint
 - [ ] The `uipath` Python SDK installed (`pip install uipath`)
 - [ ] Git installed
+
 ### Step 1 — Clone the Repository
- 
+
 ```bash
-git clone https://github.com/<your-org>/adro-acord-ai.git
-cd adro-acord-ai/Agent
+git clone https://github.com/ADROMinds/ACCORD_Automation.git
+cd ACCORD_Automation
 ```
- 
-### Step 2 — Set Up Environment Variables
- 
-Copy the example environment file:
- 
-```bash
-cp .env.example .env
-```
- 
-Open `.env` and fill in all required values:
- 
+
+---
+
+### Step 2 — Configure Environment Variables
+
+Create a `.env` file in the project root and configure the required environment variables.
+
 ```env
 GOOGLE_API_KEY=your_google_api_key
- 
-# Hugging Face (if using HF instead of Google)
+
+# Hugging Face (Optional)
 HF_ENDPOINT_URL=https://your-hf-endpoint.com
 HF_API_TOKEN=your_hf_token
 HF_MODEL_NAME=tgi
- 
+
 # UiPath Orchestrator
 MASTER_AGENT_API_KEY=your_api_key
 JWT_SECRET_KEY=your_jwt_secret
- 
-# Confidence threshold for routing decisions
+
+# Confidence Threshold
 CONFIDENCE_THRESHOLD=0.80
- 
-# UiPath Orchestrator Process Names
+
+# UiPath Process Names
 INTENT_AGENT_NAME=IntentClassifierAgent
 ACORD_AGENT_NAME=ACORDClassifierAgent
 EXTRACTION_AGENT_NAME=FinalExtractionAgent
- 
-# UiPath Data Fabric
+
+# Data Fabric
 DATA_FABRIC_ENTITY=CustomerRecords
- 
-# Set to "true" for local testing without Orchestrator
+
+# Local Testing
 MOCK_MODE=false
 ```
- 
-### Step 3 — Install Dependencies
- 
-```bash
-pip install -r requirements.txt
-```
- 
-### Step 4 — Run Locally in Mock Mode (No Orchestrator Required)
- 
-Set `MOCK_MODE=true` in `.env`, then run:
- 
-```bash
-uipath run agent '{"email_payload": {"subject": "New ACORD Submission", "body": "Please find attached ACORD 125 form for ABC Corp.", "sender": "broker@example.com", "received_at": "2026-06-29T10:00:00Z", "attachment_names": ["acord125.pdf"], "message_id": "msg-001"}, "confidence_threshold": 0.80}'
-```
- 
-This runs the full graph end-to-end using simulated node outputs — useful for local development and quick judging without live UiPath infrastructure.
- 
-### Step 5 — Deploy to UiPath Orchestrator
- 
-Package the agent:
- 
-```bash
-uipath pack
-```
- 
-Publish it to Orchestrator:
- 
-```bash
-uipath publish
-```
- 
-### Step 6 — Import the Solution in UiPath Studio
- 
-1. Open **UiPath Studio**.
-2. Import `MasterAgentSolution.uipx` (published agent package).
-3. Import `ACORD_Framework.uis` and `MasterAgentSolution (1).uis` as needed for the sub-agent solutions.
-4. In Orchestrator, configure the process references for:
-   - `IntentClassifierAgent`
-   - `ACORDClassifierAgent`
-   - `FinalExtractionAgent`
-5. Confirm the **Data Fabric** entity `CustomerRecords` is accessible from your tenant.
-### Step 7 — Run Evaluations
- 
-```bash
-uipath eval --eval-set evaluations/eval-sets/evaluation-set-default.json
-```
- 
-This validates the agent's classification and extraction accuracy against the provided evaluation set.
- 
+
 ---
- 
-## 6. 📥 Agent Input / Output
- 
-### Input Schema
- 
+
+### Step 3 — Open the Projects
+
+Open the required projects in **UiPath Studio**.
+
+```
+ACCORD Framework/
+ClassificationAgentSolution/
+ExtractionAgent/
+MasterAgentSolution/
+```
+
+Restore the project dependencies if prompted.
+
+---
+
+### Step 4 — Publish to UiPath Orchestrator
+
+Publish the following projects from UiPath Studio to your UiPath Orchestrator tenant.
+
+- ACORD Framework
+- ClassificationAgentSolution
+- ExtractionAgent
+- MasterAgentSolution
+
+After publishing, create the corresponding **Processes** in Orchestrator.
+
+---
+
+### Step 5 — Configure Orchestrator
+
+Ensure the following processes are available and correctly configured.
+
+- IntentClassifierAgent
+- ACORDClassifierAgent
+- FinalExtractionAgent
+
+Also verify that the required **Data Fabric** entity (`CustomerRecords`) is accessible.
+
+---
+
+### Step 6 — Execute the Master Agent
+
+Run the **MasterAgentSolution** from UiPath Studio or Orchestrator.
+
+The workflow automatically performs:
+
+1. Email Intent Classification
+2. ACORD Document Classification
+3. Data Extraction
+4. Validation
+5. Human-in-the-Loop routing (if confidence is below threshold)
+6. Final structured output generation
+
+---
+
+## 📥 Agent Input
+
 ```json
 {
   "email_payload": {
     "subject": "string",
     "body": "string",
-    "sender": "string (email)",
-    "received_at": "string (ISO 8601)",
-    "attachment_names": ["string"],
+    "sender": "string",
+    "received_at": "ISO 8601",
+    "attachment_names": [
+      "string"
+    ],
     "message_id": "string"
   },
   "confidence_threshold": 0.80
 }
 ```
- 
-### Output Schema
- 
+
+---
+
+## 📤 Agent Output
+
 ```json
 {
   "intent": "string",
-  "acord_type": "string (e.g. ACORD 125)",
-  "extraction": { "...": "structured fields" },
-  "ack_email": "string (generated email body, if low confidence)",
-  "audit": [{ "step": "...", "timestamp": "..." }]
+  "acord_type": "string",
+  "extraction": {
+    "...": "structured fields"
+  },
+  "ack_email": "string",
+  "audit": [
+    {
+      "step": "...",
+      "timestamp": "..."
+    }
+  ]
 }
 ```
- 
+
 ---
- 
-## 7. 🔀 Routing Logic
- 
-The `master_router` applies a configurable confidence threshold (default **0.80**) after intent classification:
- 
-- **Confidence ≥ threshold** → Proceeds to ACORD Classification → Field Extraction → Output
-- **Confidence < threshold** → Generates an acknowledgement email for the broker → HITL Review
+
+## 🔀 Routing Logic
+
+The Master Agent uses a configurable confidence threshold (default **0.80**) after intent classification.
+
+- **Confidence ≥ 0.80** → ACORD Classification → Data Extraction → Validation → Output
+- **Confidence < 0.80** → Generate acknowledgement email → Human-in-the-Loop review
+
 ---
- 
-## 8. 🧪 Mock Mode
- 
-Set `MOCK_MODE=true` in `.env` to run the pipeline without calling live Orchestrator processes. Mock nodes return realistic simulated outputs and are useful for local development and CI testing.
- 
----
+
+## 🧪 Mock Mode
+
+Set
+
+```env
+MOCK_MODE=true
+```
+
+to execute the workflow using simulated outputs instead of live UiPath Orchestrator processes. This is useful for local development, testing, and demonstrations.
  
 ## 👥 Team
  
-Built by **Team ADRO** at the UiPath Hackathon 2026.
+Built by **Team ADROMinds** at the  **[UiPath Hackathon – AgentHack 2026](https://uipath-agenthack.devpost.com/)**.
  
 ---
  
 ## 📄 License
  
-This project was created for the UiPath Hackathon 2026. All rights reserved by the respective team members.
+This project was created for the **[UiPath Hackathon – AgentHack 2026](https://uipath-agenthack.devpost.com/)**. All rights reserved by the respective team members.
  
 ---
  
